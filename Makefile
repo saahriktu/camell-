@@ -1,9 +1,20 @@
+ifeq ($(prefix),)
+	prefix=/usr/local
+endif
+ifeq ($(shell which $(CXX)),)
+	CXX=g++
+endif
+ifeq ($(libdir),)
+	libdir=$(prefix)/lib
+endif
 all:
-	g++ -c -fPIC -o camell++.o camell++.cpp
-	g++ -fPIC -shared -o libcamell++.so camell++.o
+	$(CXX) -c -fPIC $(CXXFLAGS) -o camell++.o camell++.cpp
+	$(CXX) -fPIC -shared $(CXXFLAGS) -o libcamell++.so camell++.o
+	strip -S libcamell++.so
 install:
-	cp libcamell++.so /usr/lib/
-	mkdir /usr/include/camell++
-	cp camell++.hpp /usr/include/camell++
+	if [ ! -d "$(DESTDIR)$(libdir)" ]; then mkdir -p $(DESTDIR)$(libdir); fi
+	if [ ! -d "$(DESTDIR)$(prefix)/include/camell++" ]; then mkdir -p $(DESTDIR)$(prefix)/include/camell++; fi
+	install -m755 libcamell++.so $(DESTDIR)$(libdir)
+	install -m644 camell++.hpp $(DESTDIR)$(prefix)/include/camell++
 clean:
 	rm camell++.o libcamell++.so
