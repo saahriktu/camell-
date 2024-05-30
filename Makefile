@@ -9,8 +9,7 @@ ifeq ($(libdir),)
 endif
 all:
 	$(CXX) -c -fPIC $(CXXFLAGS) -o camell++.o camell++.cpp
-	$(CXX) -fPIC -shared $(CXXFLAGS) -o libcamell++.so camell++.o
-	strip -S libcamell++.so
+	$(CXX) -fPIC -shared $(CXXFLAGS) -o libcamell++.so camell++.o -lX11
 install:
 	if [ ! -d "$(DESTDIR)$(libdir)" ]; then mkdir -p $(DESTDIR)$(libdir); fi
 	if [ ! -d "$(DESTDIR)$(prefix)/include/camell++" ]; then mkdir -p $(DESTDIR)$(prefix)/include/camell++; fi
