@@ -1,5 +1,5 @@
 /*
-         Camell++ Lib    v 1.2.0
+         Camell++ Lib    v 1.2.2
 	 X-Window routines Library
 	 Developed by saahriktu
 	 released under GNU GPLv3
