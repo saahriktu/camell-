@@ -12,9 +12,7 @@ all:
 	$(CXX) -fPIC -shared $(CXXFLAGS) -o libcamell++.so.1 camell++.o -lX11
 	ln -s libcamell++.so libcamell++.so.1
 install:
-	if [ ! -d "$(DESTDIR)$(libdir)" ]; then mkdir -p $(DESTDIR)$(libdir); fi
-	if [ ! -d "$(DESTDIR)$(prefix)/include/camell++" ]; then mkdir -p $(DESTDIR)$(prefix)/include/camell++; fi
-	install -m755 libcamell++.so $(DESTDIR)$(libdir)
-	install -m644 camell++.hpp $(DESTDIR)$(prefix)/include/camell++
+	install -pDm755 libcamell++.so libcamell++.so.1 $(DESTDIR)$(libdir)
+	install -pDm644 camell++.hpp $(DESTDIR)$(prefix)/include/camell++
 clean:
-	rm camell++.o libcamell++.so
+	rm camell++.o libcamell++.so libcamell++.so.1
