@@ -1,5 +1,5 @@
 ifeq ($(prefix),)
-	prefix=/usr/local
+	prefix=/usr
 endif
 ifeq ($(shell which $(CXX)),)
 	CXX=g++
